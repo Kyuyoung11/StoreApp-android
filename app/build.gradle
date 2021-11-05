@@ -50,4 +50,7 @@ dependencies {
 
     // Scalars 변환기 라이브러리
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }

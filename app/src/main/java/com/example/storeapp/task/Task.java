@@ -24,7 +24,7 @@ public class Task extends AsyncTask<String, Void, String> {
 
             //url post에 json 형식으로 id, pw 같이 보냄
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-            sendMsg = "id="+strings[0]+"&pw="+strings[1];
+            sendMsg = "name="+strings[0]+"&pw="+strings[1];
             osw.write(sendMsg);
             osw.flush();
 

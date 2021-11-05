@@ -1,5 +1,6 @@
 package com.example.storeapp.home;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,13 +29,18 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.btnLogin.setOnClickListener(v -> {
+        binding.btnSign.setOnClickListener(v -> {
             if (binding.etId.getText().toString().length() > 0 &&
             binding.etPw.getText().toString().length() > 0) {
                 login();
 
 
             }
+        });
+        binding.btnSign.setOnClickListener(v -> {
+           Intent intent = null;
+           intent = new Intent(this, SignupActivity.class);
+           startActivity(intent);
         });
     }
 
