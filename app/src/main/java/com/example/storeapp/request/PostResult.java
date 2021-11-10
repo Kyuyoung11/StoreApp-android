@@ -1,4 +1,4 @@
-package com.example.storeapp.json;
+package com.example.storeapp.request;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,6 +1,6 @@
 package com.example.storeapp.service;
 
-import com.example.storeapp.json.PostResult;
+import com.example.storeapp.request.PostResult;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
