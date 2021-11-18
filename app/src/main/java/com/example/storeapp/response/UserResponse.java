@@ -12,6 +12,9 @@ public class UserResponse {
     @SerializedName("pw")
     public String pw;
 
+    @SerializedName("link")
+    public String link;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -34,5 +37,13 @@ public class UserResponse {
 
     public String getPw() {
         return pw;
+    }
+
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                "id=" + id +
+                "\nname=" + name
+                + "}";
     }
 }

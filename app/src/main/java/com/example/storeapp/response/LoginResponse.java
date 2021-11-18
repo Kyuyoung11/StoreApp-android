@@ -3,8 +3,13 @@ package com.example.storeapp.response;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
+
+    @SerializedName("id")
+    private Long id;
     @SerializedName("name")
-    public String name;
+    private String name;
+    @SerializedName("pw")
+    private String pw;
 
     public String getName() {
         return name;
@@ -24,4 +29,6 @@ public class LoginResponse {
 //    public String getResultCode() {
 //        return resultCode;
 //    }
+
+
 }

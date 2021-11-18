@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static initMyApi initMyApi;
-    private static String baseUrl = "http://localhost:8080/";
+    private static String baseUrl = "http://10.0.2.2:8080/";
 
     private RetrofitClient() {
         Log.w("login", "생성 중");
@@ -27,7 +27,7 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client) //로그 기능 추가
                 .build();
-        //initMyApi = retrofit.create(initMyApi.class);
+        initMyApi = retrofit.create(initMyApi.class);
     }
 
     public static RetrofitClient getInstance() {

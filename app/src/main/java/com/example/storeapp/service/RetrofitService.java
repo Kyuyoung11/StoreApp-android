@@ -1,6 +1,7 @@
 package com.example.storeapp.service;
 
 import com.example.storeapp.request.PostResult;
+import com.example.storeapp.response.UserResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,9 +13,11 @@ import retrofit2.http.Path;
 
 public interface RetrofitService {
     @GET("api/users/{id}")
-    Call<PostResult> getPosts(@Path("id") Long id);
+    Call<UserResponse> getPosts(@Path("id") Long id);
 
     @FormUrlEncoded
     @POST("api/users")
     Call<ResponseBody> goPost(@Field("objJson") String objJson);
+
+
 }

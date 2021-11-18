@@ -13,6 +13,7 @@ import com.example.storeapp.databinding.ActivityLoginBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
 import com.example.storeapp.response.UserResponse;
+import com.example.storeapp.service.RetrofitService;
 import com.example.storeapp.task.RetrofitClient;
 import com.example.storeapp.task.Task;
 import com.example.storeapp.task.initMyApi;
@@ -26,6 +27,8 @@ import java.net.URL;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,21 +46,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        //retrofit 생성
-        retrofitClient = RetrofitClient.getInstance();
-        initMyApi = RetrofitClient.getRetrofitInterface();
+//        //retrofit 생성
+//        retrofitClient = RetrofitClient.getInstance();
+//        initMyApi = RetrofitClient.getRetrofitInterface();
 
         binding.btnLogin.setOnClickListener(v -> {
             if (binding.etId.getText().toString().trim().length() > 0 &&
-            binding.etPw.getText().toString().trim().length() > 0) {
+                    binding.etPw.getText().toString().trim().length() > 0) {
                 login();
 
             }
         });
         binding.btnSign.setOnClickListener(v -> {
-           Intent intent = null;
-           intent = new Intent(this, SignupActivity.class);
-           startActivity(intent);
+            Intent intent = null;
+            intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
         });
 
         binding.btnCheck.setOnClickListener(v -> {
@@ -72,9 +75,9 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginRequest loginRequest = new LoginRequest(name, passwd);
 
-//        //retrofit 생성
-//        retrofitClient = RetrofitClient.getInstance();
-//        initMyApi = RetrofitClient.getRetrofitInterface();
+        //retrofit 생성
+        retrofitClient = RetrofitClient.getInstance();
+        initMyApi = RetrofitClient.getRetrofitInterface();
 
         //LoginRequest 실행해서 보냄
         initMyApi.getLoginResponse(loginRequest).enqueue(
@@ -85,22 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             LoginResponse result = response.body();
 
-                            String resultCode = result.getName();
+                            String id = binding.etId.getText().toString().trim();
+                            String passwd = binding.etPw.getText().toString().trim();
 
-                            String success = "asdf"; //로그인 성공
-                            String errorId = "300"; //아이디 일치x
-                            String errorPw = "400"; //비밀번호 일치x
+                            Toast.makeText(LoginActivity.this, id + " 로그인", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("userId", id);
+                            startActivity(intent);
+                            LoginActivity.this.finish();
 
-                            if (resultCode.equals(success)) {
-                                String id = binding.etId.getText().toString().trim();
-                                String passwd = binding.etPw.getText().toString().trim();
-                                
-                                Toast.makeText(LoginActivity.this, id + " 로그인", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userId", id);
-                                startActivity(intent);
-                                LoginActivity.this.finish();
-                            }
 
                         }
 
@@ -114,18 +110,24 @@ public class LoginActivity extends AppCompatActivity {
         );
 
 
-
-
-
     }
 
     public void check() {
+        //retrofit 생성
+        retrofitClient = RetrofitClient.getInstance();
+        initMyApi = RetrofitClient.getRetrofitInterface();
+
         Call<UserResponse> call = initMyApi.requestGetUserDetail();
-        call.enqueue(new Callback<UserResponse>(){
+        call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Toast.makeText(LoginActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()) {
+                    String result = response.body().toString();
+                    Log.d("check", result);
+                } else {
+                    Toast.makeText(LoginActivity.this, "fail", Toast.LENGTH_SHORT).show();
 
+                }
             }
 
             @Override
@@ -135,8 +137,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 }
