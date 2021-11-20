@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //https://code-hyoon.tistory.com/9 코드 참고
 public class RetrofitClient {
     private static RetrofitClient instance = null;
-    private static initMyApi initMyApi;
+    private static UserAPI initMyApi;
     private static String baseUrl = "http://10.0.2.2:8080/";
 
     private RetrofitClient() {
@@ -27,7 +27,7 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client) //로그 기능 추가
                 .build();
-        initMyApi = retrofit.create(initMyApi.class);
+        initMyApi = retrofit.create(UserAPI.class);
     }
 
     public static RetrofitClient getInstance() {
@@ -37,7 +37,7 @@ public class RetrofitClient {
         return instance;
     }
 
-    public static initMyApi getRetrofitInterface() {
+    public static UserAPI getRetrofitInterface() {
         return initMyApi;
     }
 

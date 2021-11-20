@@ -7,13 +7,14 @@
     tools:context=".home.SignupActivity">
 
     <EditText
-        android:id="@+id/et_id"
+        android:id="@+id/et_signid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/et_pw"
+        app:layout_constraintEnd_toStartOf="@+id/btn_id"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
@@ -30,23 +31,21 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
-        android:text="Password"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/et_pw"
+        android:text="비밀번호"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_signpw"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/et_pw"
+        android:id="@+id/et_signpw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="numberPassword"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/et_signid"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <Button
@@ -54,9 +53,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="SIGN UP"
+        android:text="가입하기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pw" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signpw" />
+
+    <Button
+        android:id="@+id/btn_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="중복 확인"
+        app:layout_constraintBottom_toBottomOf="@+id/et_signid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_signid" />
+
+    <TextView
+        android:id="@+id/txt_resultcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/et_signid"
+        app:layout_constraintTop_toBottomOf="@+id/et_signid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

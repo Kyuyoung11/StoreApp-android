@@ -1,7 +1,6 @@
 package com.example.storeapp.home;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,22 +12,12 @@ import com.example.storeapp.databinding.ActivityLoginBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
 import com.example.storeapp.response.UserResponse;
-import com.example.storeapp.service.RetrofitService;
 import com.example.storeapp.task.RetrofitClient;
-import com.example.storeapp.task.Task;
-import com.example.storeapp.task.initMyApi;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.example.storeapp.task.UserAPI;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     private RetrofitClient retrofitClient;
-    private initMyApi initMyApi;
+    private UserAPI userAPI;
 
 
     @Override
@@ -77,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        initMyApi = RetrofitClient.getRetrofitInterface();
+        userAPI = RetrofitClient.getRetrofitInterface();
 
         //LoginRequest 실행해서 보냄
-        initMyApi.getLoginResponse(loginRequest).enqueue(
+        userAPI.getLoginResponse(loginRequest).enqueue(
                 new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -115,9 +104,9 @@ public class LoginActivity extends AppCompatActivity {
     public void check() {
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        initMyApi = RetrofitClient.getRetrofitInterface();
+        userAPI = RetrofitClient.getRetrofitInterface();
 
-        Call<UserResponse> call = initMyApi.requestGetUserDetail();
+        Call<UserResponse> call = userAPI.requestGetUserDetail();
         call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
