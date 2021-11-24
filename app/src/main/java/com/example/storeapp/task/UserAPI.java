@@ -12,7 +12,10 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface UserAPI {
-    @POST("api/users")
+    @POST("api/users/signup")
+    Call<LoginResponse> getSignupResponse(@Body LoginRequest loginRequest);
+
+    @POST("api/users/login")
     Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
 
     @GET("api/users/1")
@@ -20,6 +23,8 @@ public interface UserAPI {
 
     @GET("api/users/{name}/exists")
     Call<Boolean> checkNameExists(@Path("name") String name);
+
+
 
 
 

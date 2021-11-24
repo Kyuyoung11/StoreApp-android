@@ -58,7 +58,7 @@ public class SignupActivity extends AppCompatActivity {
         userAPI = RetrofitClient.getRetrofitInterface();
 
         //LoginRequest 실행해서 보냄
-        userAPI.getLoginResponse(loginRequest).enqueue(
+        userAPI.getSignupResponse(loginRequest).enqueue(
                 new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -106,12 +106,14 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "이미 있음", Toast.LENGTH_SHORT).show();
                     binding.txtResultcheck.setTextColor(Color.RED);
                     binding.txtResultcheck.setText("이미 존재하는 아이디입니다.");
+                    binding.btnSignup.setEnabled(false);
 
 
                 } else {
                     Toast.makeText(SignupActivity.this, "사용 가능", Toast.LENGTH_SHORT).show();
                     binding.txtResultcheck.setTextColor(Color.GREEN);
                     binding.txtResultcheck.setText("사용 가능한 아이디입니다.");
+                    binding.btnSignup.setEnabled(true);
 
                 }
             }
