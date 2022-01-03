@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.storeapp.MainActivity;
 import com.example.storeapp.databinding.ActivityLoginBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
@@ -84,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String passwd = binding.etPw.getText().toString().trim();
 
                                 Toast.makeText(LoginActivity.this, id + " 로그인", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
                                 intent.putExtra("userId", id);
                                 startActivity(intent);
                                 LoginActivity.this.finish();

@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.storeapp.MainActivity;
 import com.example.storeapp.databinding.ActivitySignupBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
-import com.example.storeapp.response.UserResponse;
 import com.example.storeapp.task.RetrofitClient;
 import com.example.storeapp.task.UserAPI;
 
