@@ -27,8 +27,10 @@ public class FragmentActivity extends AppCompatActivity {
 
         binding.btnSearch.setOnClickListener(v-> {
             SearchFragment searchFragment = new SearchFragment();
-            ft.replace(binding.frameLayout.getId(), searchFragment);
-            ft.commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(binding.frameLayout.getId(), searchFragment)
+                    .commit();
         });
     }
 }

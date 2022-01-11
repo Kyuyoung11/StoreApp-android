@@ -18,7 +18,7 @@ public interface UserAPI {
     @POST("api/users/login")
     Call<LoginResponse> getLoginResponse(@Body LoginRequest loginRequest);
 
-    @GET("api/users/1")
+    @GET("api/users/6")
     Call<UserResponse> requestGetUserDetail();
 
     @GET("api/users/{name}/exists")
