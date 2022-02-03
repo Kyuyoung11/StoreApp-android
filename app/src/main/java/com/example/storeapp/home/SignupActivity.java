@@ -12,7 +12,7 @@ import com.example.storeapp.databinding.ActivitySignupBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
 import com.example.storeapp.task.RetrofitClient;
-import com.example.storeapp.task.UserAPI;
+import com.example.storeapp.task.MyAPI;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
     private RetrofitClient retrofitClient;
-    private UserAPI userAPI;
+    private MyAPI myAPI;
 
 
     @Override
@@ -53,10 +53,10 @@ public class SignupActivity extends AppCompatActivity {
 
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        userAPI = RetrofitClient.getRetrofitInterface();
+        myAPI = RetrofitClient.getRetrofitInterface();
 
         //LoginRequest 실행해서 보냄
-        userAPI.getSignupResponse(loginRequest).enqueue(
+        myAPI.getSignupResponse(loginRequest).enqueue(
                 new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -94,9 +94,9 @@ public class SignupActivity extends AppCompatActivity {
 
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        userAPI = RetrofitClient.getRetrofitInterface();
+        myAPI = RetrofitClient.getRetrofitInterface();
 
-        Call<Boolean> call = userAPI.checkNameExists(name);
+        Call<Boolean> call = myAPI.checkNameExists(name);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {

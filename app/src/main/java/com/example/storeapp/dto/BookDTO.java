@@ -2,18 +2,25 @@ package com.example.storeapp.dto;
 
 public class BookDTO {
 
+    Long id;
+    String url;
     String name;
+    int price;
     String writer;
     String company;
-    String url;
-    int price;
+    String detail;
 
-    public BookDTO(String name, String writer, String company, String url, int price) {
+
+
+    public BookDTO(Long id, String url,String name, int price,String writer, String company, String detail) {
+
+        this.id = id;
         this.name = name;
         this.writer = writer;
         this.company = company;
         this.url = url;
         this.price = price;
+        this.detail = detail;
     }
 
     public String getName() {
@@ -32,8 +39,8 @@ public class BookDTO {
         return url;
     }
 
-    public int getPrice() {
-        return price;
+    public String getPrice() {
+        return Integer.toString(price);
     }
 
     public void setName(String name) {
@@ -50,6 +57,14 @@ public class BookDTO {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public void setPrice(int price) {

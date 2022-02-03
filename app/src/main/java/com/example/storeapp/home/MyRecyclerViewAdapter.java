@@ -19,7 +19,9 @@ import com.example.storeapp.dto.BookDTO;
 
 import java.util.ArrayList;
 
-//코드 참고 -> https://stickode.tistory.com/166
+//코드 참고
+// ->프래그먼트에 리사이클러뷰 만들기 https://stickode.tistory.com/166
+// ->안드로이드 스프링 연동 리사이클러뷰 만들기 https://upcake.tistory.com/294
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder>{
     private final ArrayList<BookDTO> bookDTOArrayList;
     private Context context;
@@ -85,4 +87,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public int getItemCount() {
         return (bookDTOArrayList != null ? bookDTOArrayList.size() : 0);
     }
+
+    public void removeAllItem() {
+        bookDTOArrayList.clear();
+    }
+
 }

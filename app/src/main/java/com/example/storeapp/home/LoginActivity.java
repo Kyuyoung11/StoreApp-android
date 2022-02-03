@@ -12,7 +12,7 @@ import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
 import com.example.storeapp.response.UserResponse;
 import com.example.storeapp.task.RetrofitClient;
-import com.example.storeapp.task.UserAPI;
+import com.example.storeapp.task.MyAPI;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     private RetrofitClient retrofitClient;
-    private UserAPI userAPI;
+    private MyAPI myAPI;
 
 
     @Override
@@ -65,10 +65,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        userAPI = RetrofitClient.getRetrofitInterface();
+        myAPI = RetrofitClient.getRetrofitInterface();
 
         //LoginRequest 실행해서 보냄
-        userAPI.getLoginResponse(loginRequest).enqueue(
+        myAPI.getLoginResponse(loginRequest).enqueue(
                 new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -115,15 +115,15 @@ public class LoginActivity extends AppCompatActivity {
     public void check() {
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
-        userAPI = RetrofitClient.getRetrofitInterface();
+        myAPI = RetrofitClient.getRetrofitInterface();
 
-        Call<UserResponse> call = userAPI.requestGetUserDetail();
+        Call<UserResponse> call = myAPI.requestGetUserDetail();
         call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
                     String result = response.body().toString();
-                    Log.d("check", result);
+                    Log.d("check_api", result);
                 } else {
                     Toast.makeText(LoginActivity.this, "fail", Toast.LENGTH_SHORT).show();
 

@@ -10,11 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //https://code-hyoon.tistory.com/9 코드 참고
 public class RetrofitClient {
     private static RetrofitClient instance = null;
-    private static UserAPI initMyApi;
+    private static MyAPI initMyApi;
     private static String baseUrl = "http://10.0.2.2:8080/";
 
     private RetrofitClient() {
-        Log.w("login", "생성 중");
         //로그를 보기 위한 Interceptor
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -27,7 +26,7 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client) //로그 기능 추가
                 .build();
-        initMyApi = retrofit.create(UserAPI.class);
+        initMyApi = retrofit.create(MyAPI.class);
     }
 
     public static RetrofitClient getInstance() {
@@ -37,7 +36,7 @@ public class RetrofitClient {
         return instance;
     }
 
-    public static UserAPI getRetrofitInterface() {
+    public static MyAPI getRetrofitInterface() {
         return initMyApi;
     }
 
