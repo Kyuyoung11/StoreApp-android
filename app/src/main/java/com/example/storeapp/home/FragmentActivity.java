@@ -32,5 +32,11 @@ public class FragmentActivity extends AppCompatActivity {
                     .replace(binding.frameLayout.getId(), searchFragment)
                     .commit();
         });
+        binding.btnHome.setOnClickListener(v-> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(binding.frameLayout.getId(), mainFragment)
+                    .commit();
+        });
     }
 }

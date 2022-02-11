@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProductResponse {
 
+
     @SerializedName("id")
     private Long id;
     @SerializedName("name")
@@ -26,5 +27,29 @@ public class ProductResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getDetail() {
+        return detail;
     }
 }

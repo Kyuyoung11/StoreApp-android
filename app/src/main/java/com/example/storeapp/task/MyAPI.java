@@ -1,9 +1,14 @@
 package com.example.storeapp.task;
 
+import com.example.storeapp.dto.BookDTO;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
+import com.example.storeapp.response.ProductBasicResponse;
+import com.example.storeapp.response.ProductListResponse;
 import com.example.storeapp.response.ProductResponse;
 import com.example.storeapp.response.UserResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,7 +32,7 @@ public interface MyAPI {
 
 
     @GET("api/products")
-    Call<ProductResponse> getAllProducts();
+    Call<ProductBasicResponse> getAllProducts();
 
 
 

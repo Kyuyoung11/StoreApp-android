@@ -75,7 +75,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.tvName.setText(bookDTOPosition.getName());
         holder.tvWriter.setText(bookDTOPosition.getWriter());
         holder.tvCompany.setText(bookDTOPosition.getCompany());
-        holder.tvPrice.setText(bookDTOPosition.getPrice());
+        holder.tvPrice.setText(bookDTOPosition.getPrice()+"원");
 
         context = holder.itemView.getContext();
 
@@ -85,7 +85,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return (bookDTOArrayList != null ? bookDTOArrayList.size() : 0);
+        //return (bookDTOArrayList != null ? bookDTOArrayList.size() : 0);
+        Log.d("size", bookDTOArrayList.size() + "");
+        return bookDTOArrayList.size();
     }
 
     public void removeAllItem() {
