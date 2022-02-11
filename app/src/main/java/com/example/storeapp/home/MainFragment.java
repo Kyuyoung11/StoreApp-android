@@ -11,12 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.storeapp.R;
 import com.example.storeapp.dto.BookDTO;
-import com.example.storeapp.response.ProductBasicResponse;
-import com.example.storeapp.response.ProductListResponse;
 import com.example.storeapp.response.ProductResponse;
 import com.example.storeapp.task.MyAPI;
 import com.example.storeapp.task.RetrofitClient;
@@ -78,15 +75,15 @@ public class MainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        myAPI.getAllProducts().enqueue(new Callback<ProductBasicResponse>(
+        myAPI.getAllProducts().enqueue(new Callback<List<ProductResponse>>(
 
         ) {
             @Override
-            public void onResponse(Call<ProductBasicResponse> call, Response<ProductBasicResponse> response) {
+            public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
                 if(response.isSuccessful()) {
-                    ProductBasicResponse result = response.body();
+                    List<ProductResponse> result = response.body();
 
-                    for (ProductResponse item : result.getProductListResponse().getProductsList()) {
+                    for (ProductResponse item : result) {
                         bookDTOArrayList.add(new BookDTO(item.getId(), item.getUrl(), item.getName(), item.getPrice()
                                 , item.getWriter(), item.getCompany(), item.getDetail()));
                         Log.d("bookdto", item.getName());
@@ -99,7 +96,7 @@ public class MainFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ProductBasicResponse> call, Throwable t) {
+            public void onFailure(Call<List<ProductResponse>> call, Throwable t) {
                 Log.d("bookdto", "연결 실패");
                 t.printStackTrace();
             }

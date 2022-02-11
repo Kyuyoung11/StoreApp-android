@@ -1,10 +1,7 @@
 package com.example.storeapp.task;
 
-import com.example.storeapp.dto.BookDTO;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
-import com.example.storeapp.response.ProductBasicResponse;
-import com.example.storeapp.response.ProductListResponse;
 import com.example.storeapp.response.ProductResponse;
 import com.example.storeapp.response.UserResponse;
 
@@ -15,7 +12,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface MyAPI {
     @POST("api/users/signup")
@@ -32,7 +28,7 @@ public interface MyAPI {
 
 
     @GET("api/products")
-    Call<ProductBasicResponse> getAllProducts();
+    Call<List<ProductResponse>> getAllProducts();
 
 
 
