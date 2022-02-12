@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "비밀번호가 옳지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
-                        else if (resultCode.equals("500")) {
+                        else if (resultCode.equals("404")) {
                             Toast.makeText(LoginActivity.this, "존재하지 않는 사용자입니다.", Toast.LENGTH_LONG).show();
                         }
 
