@@ -30,6 +30,12 @@ public interface MyAPI {
     @GET("api/products")
     Call<List<ProductResponse>> getAllProducts();
 
+    @GET("api/products/get/{id}")
+    Call<ProductResponse> getProduct(@Path("id") Long id);
+
+    @GET("api/products/serach/{words}")
+    Call<List<ProductResponse>> serachProduct(@Path("words") String words);
+
 
 
 
