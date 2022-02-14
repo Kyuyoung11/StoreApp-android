@@ -1,6 +1,7 @@
 package com.example.storeapp.task;
 
 import com.example.storeapp.request.LoginRequest;
+import com.example.storeapp.request.StringRequest;
 import com.example.storeapp.response.LoginResponse;
 import com.example.storeapp.response.ProductResponse;
 import com.example.storeapp.response.UserResponse;
@@ -33,8 +34,8 @@ public interface MyAPI {
     @GET("api/products/get/{id}")
     Call<ProductResponse> getProduct(@Path("id") Long id);
 
-    @GET("api/products/serach/{words}")
-    Call<List<ProductResponse>> serachProduct(@Path("words") String words);
+    @POST("api/products/search")
+    Call<List<ProductResponse>> searchProduct(@Body StringRequest stringRequest);
 
 
 

@@ -1,6 +1,7 @@
 package com.example.storeapp.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.storeapp.R;
 import com.example.storeapp.databinding.ActivitySignupBinding;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
@@ -24,13 +26,16 @@ public class SignupActivity extends AppCompatActivity {
 
     private RetrofitClient retrofitClient;
     private MyAPI myAPI;
-
+    int color_btnb, color_btnf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        color_btnb = ContextCompat.getColor(this, R.color.btn_basic);
+        color_btnf = ContextCompat.getColor(this, R.color.btn_false);
 
 
         binding.btnSignup.setOnClickListener(v -> {
@@ -105,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
                     binding.txtResultcheck.setTextColor(Color.RED);
                     binding.txtResultcheck.setText("이미 존재하는 아이디입니다.");
                     binding.btnSignup.setEnabled(false);
+                    binding.btnSignup.setBackgroundColor(color_btnf);
 
 
                 } else {
@@ -112,6 +118,8 @@ public class SignupActivity extends AppCompatActivity {
                     binding.txtResultcheck.setTextColor(Color.GREEN);
                     binding.txtResultcheck.setText("사용 가능한 아이디입니다.");
                     binding.btnSignup.setEnabled(true);
+                    binding.btnSignup.setBackgroundColor(color_btnb);
+
 
                 }
             }

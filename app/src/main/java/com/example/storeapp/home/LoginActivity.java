@@ -46,14 +46,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         binding.btnSign.setOnClickListener(v -> {
-            Intent intent = null;
-            intent = new Intent(this, SignupActivity.class);
+            Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
         });
 
-        binding.btnCheck.setOnClickListener(v -> {
-            check();
-        });
     }
 
     public void login() {
@@ -82,9 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                                 String id = binding.etId.getText().toString().trim();
                                 String passwd = binding.etPw.getText().toString().trim();
 
-                                Toast.makeText(LoginActivity.this, id + " 로그인", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.putExtra("userId", id);
+
                                 startActivity(intent);
                                 LoginActivity.this.finish();
 
@@ -112,31 +109,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void check() {
-        //retrofit 생성
-        retrofitClient = RetrofitClient.getInstance();
-        myAPI = RetrofitClient.getRetrofitInterface();
-
-        Call<UserResponse> call = myAPI.requestGetUserDetail();
-        call.enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.isSuccessful()) {
-                    String result = response.body().toString();
-                    Log.d("check_api", result);
-                } else {
-                    Toast.makeText(LoginActivity.this, "fail", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "실패", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
 
 }
