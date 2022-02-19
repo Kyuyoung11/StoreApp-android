@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.storeapp.R;
 import com.example.storeapp.databinding.ActivityFragmentBinding;
@@ -75,6 +76,8 @@ public class FragmentActivity extends AppCompatActivity {
 
 
         binding.btnSearch.setOnClickListener(v-> {
+            InputMethodManager mInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            mInputMethodManager.hideSoftInputFromWindow(binding.etSearch.getWindowToken(), 0);
             SearchFragment searchFragment = new SearchFragment();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -94,6 +97,15 @@ public class FragmentActivity extends AppCompatActivity {
         binding.btnUser.setOnClickListener(v -> {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        });
+
+        binding.btnCart.setOnClickListener(v -> {
+            CartFragment cartFragment = new CartFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(binding.frameLayout.getId(), cartFragment.newInstance())
+                    .commit();
+
         });
     }
 }

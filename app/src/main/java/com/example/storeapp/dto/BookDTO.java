@@ -27,6 +27,14 @@ public class BookDTO {
         return name;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public String getWriter() {
         return writer;
     }

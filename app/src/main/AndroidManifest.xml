@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".home.DetailFragment"
+            android:exported="true" />
+        <activity
+            android:name=".home.CartFragment"
+            android:exported="true" />
+        <activity
             android:name=".home.FragmentActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
@@ -27,13 +33,11 @@
         <activity
             android:name=".home.SignupActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".home.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-
-        </activity>
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>

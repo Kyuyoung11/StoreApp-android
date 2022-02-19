@@ -1,6 +1,7 @@
 package com.example.storeapp.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -50,12 +52,33 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             this.imageView = (ImageView) view.findViewById(R.id.imageView);
             this.tvPrice = (TextView) view.findViewById(R.id.book_price);
 
-            view.setClickable(true);
-            view.setOnClickListener(v -> {
-                pos = getAdapterPosition();
-                Toast.makeText(v.getContext(), pos ,Toast.LENGTH_SHORT).show();
-
-            });
+//            view.setClickable(true);
+//            view.setOnClickListener(v -> {
+//                pos = getAdapterPosition();
+//                if (pos!=RecyclerView.NO_POSITION) {
+//                    BookDTO bookDTO = bookDTOArrayList.get(pos);
+//
+//                    Long id = bookDTO.getId();
+//                    String url = bookDTO.getUrl();
+//                    String name = bookDTO.getName();
+//                    String price = bookDTO.getPrice();
+//                    String writer = bookDTO.getWriter();
+//                    String company = bookDTO.getCompany();
+//                    String detail = bookDTO.getDetail();
+//
+//                    Intent intent = new Intent(context, DetailFragment.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.putExtra("id", id);
+//                    intent.putExtra("url", url);
+//                    intent.putExtra("price", price);
+//                    intent.putExtra("writer", writer);
+//                    intent.putExtra("name", name);
+//                    intent.putExtra("company", company);
+//                    intent.putExtra("detail", detail);
+//
+//                    context.startActivity(intent);
+//                }
+//
+//            });
 
         }
     }
@@ -81,6 +104,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         Glide.with(context).load(bookDTOArrayList.get(position).getUrl()).into(holder.imageView);
 
+//        holder.itemView.setOnClickListener(v -> {
+//            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+//            activity.getFragmentManager().beginTransaction().replace(R.id.detail_frag, new DetailFragment()).addToBackStack(null).commit();
+//        });
     }
 
     @Override
