@@ -28,11 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+// 코드 참고
+// param 전달 : https://3unkong.tistory.com/5
 public class SearchFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String TAG = "searchfragment";

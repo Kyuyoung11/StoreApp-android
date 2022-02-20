@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 //코드 참고
 // ->프래그먼트에 리사이클러뷰 만들기 https://stickode.tistory.com/166
 // ->안드로이드 스프링 연동 리사이클러뷰 만들기 https://upcake.tistory.com/294
+// ->리사이클러뷰 선택 시 프래그먼트 전환 https://stackoverflow.com/questions/62709032/how-to-move-adapter-to-fragment
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder>{
     private final ArrayList<BookDTO> bookDTOArrayList;
     private Context context;
@@ -52,33 +55,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             this.imageView = (ImageView) view.findViewById(R.id.imageView);
             this.tvPrice = (TextView) view.findViewById(R.id.book_price);
 
-//            view.setClickable(true);
-//            view.setOnClickListener(v -> {
-//                pos = getAdapterPosition();
-//                if (pos!=RecyclerView.NO_POSITION) {
-//                    BookDTO bookDTO = bookDTOArrayList.get(pos);
-//
-//                    Long id = bookDTO.getId();
-//                    String url = bookDTO.getUrl();
-//                    String name = bookDTO.getName();
-//                    String price = bookDTO.getPrice();
-//                    String writer = bookDTO.getWriter();
-//                    String company = bookDTO.getCompany();
-//                    String detail = bookDTO.getDetail();
-//
-//                    Intent intent = new Intent(context, DetailFragment.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.putExtra("id", id);
-//                    intent.putExtra("url", url);
-//                    intent.putExtra("price", price);
-//                    intent.putExtra("writer", writer);
-//                    intent.putExtra("name", name);
-//                    intent.putExtra("company", company);
-//                    intent.putExtra("detail", detail);
-//
-//                    context.startActivity(intent);
-//                }
-//
-//            });
 
         }
     }
@@ -94,20 +70,36 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        String id, name, writer, company, price, detail, url;
         BookDTO bookDTOPosition = bookDTOArrayList.get(position);
-        holder.tvName.setText(bookDTOPosition.getName());
-        holder.tvWriter.setText(bookDTOPosition.getWriter());
-        holder.tvCompany.setText(bookDTOPosition.getCompany());
-        holder.tvPrice.setText(bookDTOPosition.getPrice()+"원");
+        id = Long.toString(bookDTOPosition.getId());
+        url = bookDTOPosition.getUrl();
+        name = bookDTOPosition.getName();
+        writer = bookDTOPosition.getWriter();
+        company = bookDTOPosition.getCompany();
+        price = bookDTOPosition.getPrice();
+        detail = bookDTOPosition.getDetail();
+
+        holder.tvName.setText(name);
+        holder.tvWriter.setText(writer);
+        holder.tvCompany.setText(company);
+        holder.tvPrice.setText(price+"원");
 
         context = holder.itemView.getContext();
 
         Glide.with(context).load(bookDTOArrayList.get(position).getUrl()).into(holder.imageView);
 
-//        holder.itemView.setOnClickListener(v -> {
-//            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//            activity.getFragmentManager().beginTransaction().replace(R.id.detail_frag, new DetailFragment()).addToBackStack(null).commit();
-//        });
+
+        holder.imageView.setOnClickListener(v -> {
+            //DetailFragment fragment = new DetailFragment();
+            FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.frameLayout, DetailFragment.newInstance(id, name, url, price, writer, company, detail));
+            ft.addToBackStack(null);
+            ft.commit();
+
+        });
+
     }
 
     @Override
