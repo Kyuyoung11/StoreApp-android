@@ -7,22 +7,25 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.storeapp.R;
 import com.example.storeapp.databinding.ActivityFragmentBinding;
-import com.example.storeapp.databinding.ActivityLoginBinding;
+import com.example.storeapp.dto.GlobalVar;
 
+//코드 참고
+// 전역 변수 : http://slog2.egloos.com/v/3896766
 public class FragmentActivity extends AppCompatActivity {
     private static final String TAG = "fragmentactivity";
     private ActivityFragmentBinding binding;
     String words;
     int color_btnb, color_btnf;
+    GlobalVar gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,11 @@ public class FragmentActivity extends AppCompatActivity {
         binding = ActivityFragmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        gv = (GlobalVar)getApplicationContext();
+
         color_btnb = ContextCompat.getColor(this, R.color.btn_basic);
         color_btnf = ContextCompat.getColor(this, R.color.btn_false);
+
 
         binding.btnSearch.setEnabled(false);
         binding.btnSearch.setBackgroundColor(color_btnf);
@@ -76,6 +82,7 @@ public class FragmentActivity extends AppCompatActivity {
 
 
         binding.btnSearch.setOnClickListener(v-> {
+            binding.linBar.setVisibility(View.VISIBLE);
             InputMethodManager mInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             mInputMethodManager.hideSoftInputFromWindow(binding.etSearch.getWindowToken(), 0);
             SearchFragment searchFragment = new SearchFragment();
@@ -87,6 +94,7 @@ public class FragmentActivity extends AppCompatActivity {
 
 
         binding.btnHome.setOnClickListener(v-> {
+            binding.linBar.setVisibility(View.VISIBLE);
             binding.etSearch.setText("");
             getSupportFragmentManager()
                     .beginTransaction()
@@ -95,16 +103,26 @@ public class FragmentActivity extends AppCompatActivity {
         });
 
         binding.btnUser.setOnClickListener(v -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            if (!gv.isLogin()) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
 
         binding.btnCart.setOnClickListener(v -> {
-            CartFragment cartFragment = new CartFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(binding.frameLayout.getId(), cartFragment.newInstance())
-                    .commit();
+            if (gv.isLogin()) {
+                binding.linBar.setVisibility(View.GONE);
+                CartFragment cartFragment = new CartFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(binding.frameLayout.getId(), cartFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+            else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
 
         });
     }

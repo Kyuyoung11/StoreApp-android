@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,8 @@ public class DetailFragment extends Fragment {
     private static final String pprice = "param7";
     String id, name, url, writer, price, company, detail;
     TextView tv_name, tv_wrcom, tv_price, tv_detail;
+    View footer;
+    LinearLayout lin;
     ImageView imv;
 
     public DetailFragment() {
@@ -52,6 +55,9 @@ public class DetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
         if (getArguments() != null) {
             id = getArguments().getString(pid);
             name = getArguments().getString(pname);
@@ -69,15 +75,24 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_detail_fragment, container, false);
 
+        footer = (View)getLayoutInflater().inflate(R.layout.activity_fragment, container);
+
+        lin = (LinearLayout) footer.findViewById(R.id.lin_bar);
+        lin.setVisibility(View.GONE);
+
+
+
 
         tv_name = (TextView)view.findViewById(R.id.tv_name);
         tv_wrcom = (TextView)view.findViewById(R.id.tv_wrcom);
         imv = (ImageView)view.findViewById(R.id.imgv_detail);
+        tv_price = (TextView)view.findViewById(R.id.tv_price);
 
         String str = writer + " | " + company;
 
         tv_name.setText(name);
         tv_wrcom.setText(str);
+        tv_price.setText(price + "원");
 
         Glide.with(this).load(url).into(imv);
 

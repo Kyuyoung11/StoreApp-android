@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.storeapp.R;
 import com.example.storeapp.dto.BookDTO;
@@ -26,16 +27,32 @@ import retrofit2.Response;
 public class CartFragment extends Fragment {
     private static final String TAG = "cartFragment";
 
+    //LayoutInflater inflater;
+    View footer;
+    LinearLayout lin;
+
     public CartFragment() {
     }
 
     public static CartFragment newInstance() {
         CartFragment fragment = new CartFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        footer = getLayoutInflater().inflate(R.layout.activity_fragment, null);
+
+        lin = (LinearLayout) footer.findViewById(R.id.lin_bar);
+        lin.setVisibility(View.VISIBLE);
+
     }
 
     @Override

@@ -12,14 +12,15 @@
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="top"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_search"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
@@ -40,6 +41,7 @@
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:backgroundTint="@color/btn_false"
             android:scaleType="fitCenter"
             android:src="@drawable/search"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,8 +68,9 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_weight="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,25 +83,27 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/lin_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btn_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/btn_basic"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/home" />
 
         <ImageButton
             android:id="@+id/btn_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/btn_basic"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/user" />

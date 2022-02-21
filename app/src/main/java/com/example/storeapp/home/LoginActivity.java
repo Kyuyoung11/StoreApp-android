@@ -8,9 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.storeapp.databinding.ActivityLoginBinding;
+import com.example.storeapp.dto.GlobalVar;
 import com.example.storeapp.request.LoginRequest;
 import com.example.storeapp.response.LoginResponse;
-import com.example.storeapp.response.UserResponse;
 import com.example.storeapp.task.RetrofitClient;
 import com.example.storeapp.task.MyAPI;
 
@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private RetrofitClient retrofitClient;
     private MyAPI myAPI;
+    GlobalVar user;
 
 
     @Override
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        user = (GlobalVar)getApplicationContext();
 
 
 //        //retrofit 생성
@@ -74,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful() && resultCode.equals("200")) {
 
                                 LoginResponse result = response.body();
+
+                                user.setLogin(true);
+                                user.setId(result.getId());
 
                                 String id = binding.etId.getText().toString().trim();
                                 String passwd = binding.etPw.getText().toString().trim();
