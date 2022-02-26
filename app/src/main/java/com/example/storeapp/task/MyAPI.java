@@ -37,6 +37,9 @@ public interface MyAPI {
     @POST("api/products/search")
     Call<List<ProductResponse>> searchProduct(@Body StringRequest stringRequest);
 
+    @GET("api/cart/{id}")
+    Call<List<ProductResponse>> getCartProducts(@Path("id") Long id);
+
 
 
 
