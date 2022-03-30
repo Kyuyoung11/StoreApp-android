@@ -115,7 +115,7 @@ public class FragmentActivity extends AppCompatActivity {
                 CartFragment cartFragment = new CartFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(binding.frameLayout.getId(), cartFragment.newInstance())
+                        .replace(binding.frameLayout.getId(), cartFragment.newInstance(Long.toString(gv.getId())))
                         .addToBackStack(null)
                         .commit();
             }

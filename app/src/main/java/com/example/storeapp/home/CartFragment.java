@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.example.storeapp.R;
 import com.example.storeapp.dto.BookDTO;
+import com.example.storeapp.dto.GlobalVar;
 import com.example.storeapp.request.StringRequest;
 import com.example.storeapp.response.ProductResponse;
 import com.example.storeapp.task.MyAPI;
@@ -43,11 +44,17 @@ public class CartFragment extends Fragment {
     private RetrofitClient retrofitClient;
     private MyAPI myAPI;
 
+    private static final String uid = "param1";
+    private Long id;
+
     public CartFragment() {
     }
 
-    public static CartFragment newInstance() {
+    public static CartFragment newInstance(String p_id) {
         CartFragment fragment = new CartFragment();
+        Bundle args = new Bundle();
+        args.putString(uid, p_id);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -65,6 +72,10 @@ public class CartFragment extends Fragment {
         lin = (LinearLayout) footer.findViewById(R.id.lin_bar);
         lin.setVisibility(View.VISIBLE);
 
+        if (getArguments() != null) {
+            id = Long.parseLong(getArguments().getString(uid).trim());
+        }
+
     }
 
     @Override
@@ -79,47 +90,49 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_cart_fragment, container, false);
 
 
-//        bookDTOArrayList.clear();
-//
-//        recyclerView = view.findViewById(R.id.recyclerView);
-//        recyclerView.setHasFixedSize(true);
-//-
-//
-//        retrofitClient = RetrofitClient.getInstance();
-//        myAPI = RetrofitClient.getRetrofitInterface();
-//
-//        myAPI.searchProduct(stringRequest).enqueue(new Callback<List<ProductResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
-//                if(response.isSuccessful()) {
-//                    List<ProductResponse> result = response.body();
-//
-//                    for (ProductResponse item : result) {
-//                        bookDTOArrayList.add(new BookDTO(item.getId(), item.getUrl(), item.getName(), item.getPrice()
-//                                , item.getWriter(), item.getCompany(), item.getDetail()));
-//                        Log.d("bookdto", item.getName());
-//                    }
-//                    adapter = new MyRecyclerViewAdapter(bookDTOArrayList, getContext());
-//                    recyclerView.setAdapter(adapter);
-//                }else {
-//                    Log.d("bookdto", "response fail");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ProductResponse>> call, Throwable t) {
-//                Log.d("bookdto", "연결 실패");
-//                t.printStackTrace();
-//            }
-//        });
-//
-//
-//
-//
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        bookDTOArrayList.clear();
+
+        recyclerView = view.findViewById(R.id.cart_recyler);
+        recyclerView.setHasFixedSize(true);
+
+
+        retrofitClient = RetrofitClient.getInstance();
+        myAPI = RetrofitClient.getRetrofitInterface();
+
+        myAPI.getCartProducts(id).enqueue(new Callback<List<ProductResponse>>() {
+            @Override
+            public void onResponse(Call<List<ProductResponse>> call, Response<List<ProductResponse>> response) {
+                if(response.isSuccessful()) {
+                    List<ProductResponse> result = response.body();
+
+                    for (ProductResponse item : result) {
+                        bookDTOArrayList.add(new BookDTO(item.getId(), item.getUrl(), item.getName(), item.getPrice()
+                                , item.getWriter(), item.getCompany(), item.getDetail()));
+                        Log.d("bookdto", item.getName());
+                    }
+                    adapter = new MyRecyclerViewAdapter(bookDTOArrayList, getContext());
+                    recyclerView.setAdapter(adapter);
+                }else {
+                    Log.d("bookdto", "response fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductResponse>> call, Throwable t) {
+                Log.d("bookdto", "연결 실패");
+                t.printStackTrace();
+            }
+        });
+
+
+
+
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
 
 
